@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title><h1>Login</h1></title>
+		<h1>Login</h1>
+  	</head>
+  	<body>
+    	<form id="loginForm">
+      		<div><input type="text" id="username" placeholder="Enter Username" required></div>
+      		<div><input type="password" id="password" placeholder="Enter Password" required></div>
+      		<div><input type="submit" value="Enter"></div>
+    	</form>
+
+    	<script>
+      		document.getElementById("loginForm").addEventListener("submit", function(e) {
+			e.preventDefault();
+        		const name = document.getElementById("username").value;
+        		const password = document.getElementById("password").value;
+
+			fetch("/login", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+			  	body: JSON.stringify({ name, password })
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (data.error) {
+			    			alert("Login failed: " + data.error);
+					} else {
+						alert("Login successful! Welcome " + data.user.name);
+						window.location.href = "todo.html";
+					}
+				})
+				.catch(error => console.error("Error:", error));
+		});
+    	</script>
+  	</body>
+</html>
+

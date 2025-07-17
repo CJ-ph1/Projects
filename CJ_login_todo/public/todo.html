@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>My Todo List</title>
+    		<h1>My Todo List</h1>
+  	</head>
+  	<body>
+		<form>
+			<input type="text" id="userInput" placeholder="Add a new todo">
+	      		<input type="button" id="enterBtn" value="Enter">
+	      		<div id="result"></div>
+	    	</form>
+
+    	<script>
+		let todoList = [];
+	      	const input = document.getElementById("userInput");
+	      	const button = document.getElementById("enterBtn");
+	      	const output = document.getElementById("result");
+
+     		fetchTodos();
+
+	      	button.addEventListener("click", () => {
+			const todoText = input.value.trim();
+			if (!todoText) return;
+
+			fetch("/todos", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ todo: todoText, isComplete: false })
+			})
+				.then(() => {
+					input.value = "";
+					fetchTodos();
+				})
+				.catch(error => console.error("Error adding todo:", error));
+		});
+
+		function fetchTodos() {
+			fetch("/todos")
+		  	.then(r => r.json())
+		  	.then(data => {
+				todoList = data;
+				showResult();
+			})
+				.catch(error => console.error("Error fetching todos:", error));
+		}
+
+		function taskComplete(id) {
+			fetch("/todos", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id: id, isComplete: true })
+			})
+				.then(() => fetchTodos())
+				.catch(error => console.error("Error updating todo:", error));
+		}
+
+		function showResult() {
+			output.innerHTML = "";
+			todoList.forEach((todo) => {
+		  	const taskItem = document.createElement("div");
+		  	taskItem.textContent = todo.todo + " ";
+		  	taskItem.style.textDecoration = todo.isComplete ? "line-through" : "";
+		  
+			if (!todo.isComplete) {
+				const completeBtn = document.createElement("button");
+		    		completeBtn.textContent = "X";
+		    		completeBtn.onclick = () => taskComplete(todo.id);
+		    		taskItem.appendChild(completeBtn);
+			}
+				output.appendChild(taskItem);
+			});
+		}
+	</script>
+	</body>
+</html>
+
