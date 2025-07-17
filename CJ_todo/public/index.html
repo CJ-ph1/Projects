@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<body>
+	<h1> My Todo List </h1>
+
+	<form>
+		<input type="text" id="userInput">
+		<input type="button" id="enterBtn" value="Enter">
+		<div id="result"></div> 
+	</form>
+	
+	<script>
+		let todoList = [];
+		const input = document.getElementById("userInput");
+		const button = document.getElementById("enterBtn");
+		const output = document.getElementById("result");
+
+		fetchTodos();
+
+		button.addEventListener("click", () => {
+			const todoText = input.value.trim();
+			if (!todoText) return;
+
+			fetch("http://localhost:3000/todos", {
+				method: "POST",
+				headers: {"Content-Type" : "application/json"},
+				body: JSON.stringify({todo: todoText, isComplete: false})
+			})
+				.then(() => {
+					input.value = "";
+					fetchTodos();
+				});
+		});
+
+		function fetchTodos(){
+			fetch("http://localhost:3000/todos")
+				.then(r => r.json())
+				.then(data => {
+					todoList = data;
+					showResult();
+				});	
+		};
+
+		function taskComplete(index){
+			fetch("http://localhost:3000/todos", {
+				method: "POST",
+				headers: {"Content-Type" : "application/json"},
+				body: JSON.stringify({index: index, isComplete: true})
+			})
+				.then(() => fetchTodos());
+		};
+
+		function showResult(){
+			output.innerHTML = "";
+			todoList.forEach((todo, i) => {
+				const taskItem = document.createElement("div");
+				taskItem.textContent = todo.todo + " ";
+				taskItem.style.textDecoration = todo.isComplete ? "line-through" : "";
+
+				const completeBtn = document.createElement("button");
+				completeBtn.textContent = "X";
+				completeBtn.onclick = () => taskComplete(i);
+
+				taskItem.append(completeBtn);
+				output.appendChild(taskItem);
+			});
+		};
+	</script>
+</body>
+
+</html>
