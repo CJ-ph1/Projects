@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".SimpleCalculator">
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="SIMPLE CALCULATOR"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etFirstNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLabel"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter a Number"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etSecondNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etFirstNumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter a Number"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSecondNumber"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="23dp"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/btnDiff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSecondNumber"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="60dp"
+        android:text="Minus" />
+
+    <Button
+        android:id="@+id/btnProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAdd"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="4dp"
+        android:text="Multiply" />
+
+    <Button
+        android:id="@+id/btnQuo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDiff"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="60dp"
+        android:text="Divide" />
+
+    <TextView
+        android:id="@+id/tvResultSum"
+        android:layout_width="234dp"
+        android:layout_height="62dp"
+        android:layout_below="@id/btnQuo"
+        android:layout_alignStart="@+id/etSecondNumber"
+        android:layout_alignEnd="@+id/etSecondNumber"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="70dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvResultProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvResultSum"
+        android:layout_alignStart="@+id/tvResultSum"
+        android:layout_alignEnd="@+id/tvResultSum"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="315dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvResultSum"
+        android:layout_alignStart="@+id/tvResultSum"
+        android:layout_alignEnd="@+id/tvResultSum"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="120dp"
+        android:textSize="18sp" />
+
+
+</RelativeLayout>
