@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+const readline = require('readline');
+
+const input = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let todos = [];
+
+function mainPrompt() {
+	showChoices();
+	input.question("Enter your choice: ", (choice) => {
+		const num = parseInt(choice, 10);
+
+		switch (num) {
+			case 1:
+				input.question("Enter the to-do item: ", (item) => {
+					todos.push(item);
+					console.log("Item added successfully!");
+					mainPrompt();
+				});
+				break;
+			case 2:
+				if (todos.length === 0) {
+					console.log("\nYour to-do list is empty.");
+				} else {
+					console.log("\nYour To-do List:");
+					todos.forEach((todo, index) => {
+						console.log(`${index + 1}. ${todo}`);
+					});
+				}
+				mainPrompt();
+				break;
+			case 3:
+				console.log("Bye!");
+				input.close();
+				break;
+			default:
+				console.log("Invalid choice. Please enter 1, 2, or 3.");
+				mainPrompt();
+		}
+	});
+}
+
+function showChoices() {
+	console.log("===================");
+	console.log("1. Add To-do item");
+	console.log("2. View To-do list");
+	console.log("3. Exit");
+	console.log("===================");
+}
+
+mainPrompt();
