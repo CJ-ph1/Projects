@@ -1,0 +1,69 @@
+*{
+	background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(shop.jpg);
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+h1{
+	text-align: center;
+	text-transform: uppercase;
+	color: crimson;
+	margin: 20px;
+}
+.container{
+	width: 100%;
+}
+.box{
+	max-width: 350px;
+	padding: 10px;
+	border: 2px solid black;
+	margin: 10px auto;
+}
+.box img{
+	max-width: 340px;
+	height: 500px;
+	display: block;
+	object-fit: cover;
+	padding: 5px;
+}
+.box .heading,
+.box .text{
+	width: 100%;
+	padding: 0 5px;
+	min-width: 300px;
+}
+h2{
+	text-transform: uppercase;
+	color: white;
+}
+p{
+	color: white;
+	margin: 10px 0;
+}
+a{
+	display: inline-block;
+	background: crimson;
+	color: white;
+	text-decoration: none;
+	padding: 10px 20px;
+}
+@media (min-width: 700px){
+	.container{
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	.box{
+		max-width: 700px;
+	}
+	.box img{
+		float: left;
+	}
+	.box .heading,
+	.box .text{
+		float: right;
+		width: 50%;
+	}
+}
